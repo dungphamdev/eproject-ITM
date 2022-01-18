@@ -5,36 +5,26 @@ import Login from './public/Login';
 import { Route, Router, Routes } from 'react-router-dom';
 import Navbar from './layout/Navbar';
 
+import { useState, useEffect } from "react";
+import { Navigation } from "./components/navigation";
+import { Header } from "./components/header";
+import { Features } from "./components/features";
+import { About } from "./components/about";
+import { Services } from "./components/services";
+import { Gallery } from "./components/gallery";
+import { Testimonials } from "./components/testimonials";
+import { Team } from "./components/Team";
+import { Contact } from "./components/contact";
+import HomePage from "./public/HomePage";
+import JsonData from "./data/data.json";
+
 interface IProps { }
 
 interface IState {
     activeSidebar: boolean;
-}
 
-function Home() {
-    return (
-        <div className='home'>
-            <h1>Home</h1>
-        </div>
-    );
+    landingPageData: any;
 }
-
-function Products() {
-    return (
-        <div className='products'>
-            <h1>Products</h1>
-        </div>
-    );
-}
-
-function Reports() {
-    return (
-        <div className='reports'>
-            <h1>Reports</h1>
-        </div>
-    );
-}
-
 
 
 class App extends React.Component<IProps, IState> {
@@ -42,7 +32,9 @@ class App extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
-            activeSidebar: true
+            activeSidebar: true,
+
+            landingPageData: { ...JsonData }
         };
     }
 
@@ -53,10 +45,12 @@ class App extends React.Component<IProps, IState> {
     }
 
     render() {
+        let { landingPageData } = this.state;
 
         return (
             <>
-                <Navbar
+                {/* ADMIN SECTION */}
+                {/* <Navbar
                     setSidebar={(activeSidebar: boolean) => this.setSidebar(activeSidebar)}
                 />
 
@@ -70,28 +64,14 @@ class App extends React.Component<IProps, IState> {
 
                 <div className={this.state.activeSidebar ? 'app_footer active' : 'app_footer'}>
                       <div className='footer-text'>Author: Dungpt</div>
-                </div>
+                </div> */}
+
+                {/* PUBLIC SECTION */}
+                <HomePage />
 
             </>
         )
     }
 }
-
-// function App() {
-//     return (
-//         <>
-
-
-//             <Navbar />
-
-//             <Routes>
-//                 <Route path="/" element={<Home />} />
-//                 <Route path="/product" element={<Products />} />
-//                 <Route path="/reports" element={<Reports />} />
-//             </Routes>
-
-//         </>
-//     );
-// }
 
 export default App;
